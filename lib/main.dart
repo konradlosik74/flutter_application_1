@@ -2,17 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'second_screen.dart';
 
-//void main() {
-//  runApp(MyApp());
-//}
-
-//void main() {
-//  runApp(MaterialApp(
-//    title: 'Navigation Basics',
-//    home: MyApp(),
-//  ));
-//}
-
 void main() {
   runApp(MaterialApp(
     initialRoute: '/',
