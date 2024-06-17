@@ -9,56 +9,14 @@ Future<void> main() async {
   runApp(MaterialApp(
     initialRoute: '/',
     routes: {
-      '/': (context) => //HomePage(),
-          MyApp(), //FirstScreen(),
+      '/': (context) => MyApp(),
       '/second': (context) => SecondScreen(),
     },
   ));
 }
 
-/* class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-} */
-
-/* class _HomePageState extends State<HomePage> {
-  //with RestorationMixin {
-  /*RestorableBool _enabled = RestorableBool(false); // Przykład stanu dla przełącznika
-  RestorableDouble _value = RestorableDouble(0); // Przykład stanu dla suwaka
-  RestorableString _restorableString = RestorableString("");
-  @override
-  String get restorationId => 'home_page'; // Unikalny identyfikator stanu
-
-  @override
-  void restoreState(RestorationBucket? oldBucket, bool initialRestore) {
-    registerForRestoration(_enabled, 'enabled'); // Rejestrujemy stan
-    registerForRestoration(_value, 'value');
-    registerForRestoration(_restorableString, 'restorableString');
-  }
-
-  // Funkcja resetująca stan do początkowego
-  void _reset() {
-    setState(() {
-      _enabled.value = false;
-      _value.value = 0;
-      _restorableString.value = '';
-    });
-  }*/
-
-  // Funkcja resetująca stan do początkowego
-  void _reset() {
-    Navigator.pushReplacement(
-      context,
-      PageRouteBuilder(
-        transitionDuration: Duration.zero,
-        pageBuilder: (_, __, ___) => HomePage(),
-      ),
-    );
-  }
- */
 class MyApp extends StatelessWidget {
   final TextEditingController _textController = TextEditingController();
-  //final
   TextEditingController _textController2 = TextEditingController();
 
   Future<void> saveValue(String key, String value) async {
@@ -102,28 +60,14 @@ class MyApp extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  enteredText2 = //'Wprowadzony tekst: ' +
-                      _textController.text;
-                  //_textController2.text = enteredText2;
+                  enteredText2 = _textController.text;
                   print(enteredText2);
-                  /*_enabled.value = true;
-                  _value.value = 0;
-                  _restorableString.value = _textController.text;*/
-                  await saveValue(
-                      'myKey',
-                      //_textController
-                      //  .text); //
-                      enteredText2); //'Hello, Flutter!');
+                  await saveValue('myKey', enteredText2);
                 },
                 child: Text('Zapisz'),
               ),
               ElevatedButton(
                 onPressed: () async {
-                  //_textController.text = await readValue('myKey').toString();
-                  //enteredText2 = await readValue('myKey').toString();
-                  //await saveValue('myKey', enteredText2); //'Hello, Flutter!');
-
-                  //await saveValue('myKey', 'Hello, Flutter!');
                   final value = await readValue('myKey');
                   print('Saved value: $value');
                   _textController.text = '$value';
@@ -133,8 +77,6 @@ class MyApp extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {
                   // Otwórz drugi ekran po naciśnięciu przycisku
-                  //Navigator.push(context,MaterialPageRoute(builder: (context) => SecondScreen()));
-                  //+przekaz params
                   Navigator.pushNamed(context, '/second',
                       arguments: 'Hello from FirstScreen + $enteredText2');
                 },
