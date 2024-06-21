@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
-class ThirdScreen extends StatelessWidget {
+class ThirdScreen extends StatefulWidget {
+  @override
+  _ThirdScreen createState() => _ThirdScreen();
+}
+
+//class ThirdScreen extends StatelessWidget {
+class _ThirdScreen extends State<ThirdScreen> {
   final items = List<ListItem>.generate(
     30,
     (i) => i % 6 == 0
@@ -8,9 +14,9 @@ class ThirdScreen extends StatelessWidget {
         : MessageItem('Nadawca $i', 'Treść wiadomości $i'),
   );
   void _addItem(String item) {
-    //setState(() {
-    items.add(HeadingItem(item));
-    //});
+    setState(() {
+      items.add(HeadingItem(item));
+    });
   }
 
   @override
@@ -26,9 +32,28 @@ class ThirdScreen extends StatelessWidget {
         shrinkWrap: true,
         itemBuilder: (context, index) {
           final item = items[index];
+
           return ListTile(
             title: item.buildTitle(context),
-            subtitle: item.buildSubtitle(context),
+            //subtitle: item.buildSubtitle(context),
+            trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  setState(() {
+                    items.removeAt(index);
+                    var xx = items.length;
+                    print(xx);
+                  });
+                }),
+            /* trailing: IconButton(
+              icon: Icon(Icons.delete),
+              onPressed: () {
+                setState(() {
+                  // Usuwanie elementu z listy
+                  items.removeAt(index);
+                });
+              },
+            ), */
           );
         },
       ),
